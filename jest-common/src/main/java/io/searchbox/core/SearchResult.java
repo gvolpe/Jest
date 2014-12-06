@@ -95,8 +95,10 @@ public class SearchResult extends JestResult {
                 JsonElement explanation = hitObject.get(EXPLANATION_KEY);
                 JsonObject highlight = hitObject.getAsJsonObject(HIGHLIGHT_KEY);
                 JsonElement id = hitObject.get("_id");
+                JsonElement sort = hitObject.get("sort");
 
                 if (id != null) source.add(ES_METADATA_ID, id);
+                if (sort != null) source.add("sort", sort);
                 hit = new Hit<T, K>(sourceType, source, explanationType, explanation, extractHighlight(highlight));
             }
         }
